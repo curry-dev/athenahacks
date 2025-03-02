@@ -24,7 +24,7 @@
 
     <div class="row">
       <div *ngFor="let piece of chosen_outfit" class="col p-2">
-        <img [src]="piece" alt="outfit" class="img-fluid" style="width: 300px; height: auto;"><br>
+        <img [src]="piece" alt="outfit" class="img-fluid" style="width: 300px; height: auto; border-radius: 10px;"><br>
         <a id="googleSimilar" class="m-5" [href]="'https://www.google.com/searchbyimage?image_url=' + piece + '&client=app'" target="_blank">
           Find similar online
         </a>

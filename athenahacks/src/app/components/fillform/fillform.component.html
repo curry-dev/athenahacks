@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div *ngIf="!response" class="row">
     <h4>Allow me to guide you, my friend :)</h4><br><br>
 
     <div class="fillform">
@@ -51,7 +51,7 @@
     <p>Here's more ideas (visual):</p><br>
     <div class="row">
       <div *ngFor="let piece of chosen_outfit" class="col p-2">
-        <img [src]="piece" alt="outfit" class="img-fluid w-100"><br>
+        <img [src]="piece" alt="outfit" class="img-fluid w-100" style="border-radius: 10px;"><br>
         <a id="googleSimilar" [href]="'https://www.google.com/searchbyimage?image_url=' + piece + '&client=app'" target="_blank">
           Find similar online
         </a>
