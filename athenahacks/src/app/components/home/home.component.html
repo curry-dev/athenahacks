@@ -1,12 +1,15 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <h1>prompt</h1>
-        
-      <input type="text" #prompt (keyup.enter)="calc(prompt.value)" style="width: 300px; height: 100px;">
-      <p>Response: {{ response }}</p>
-
-        <!-- <button (click)="calc('hello')">calculate</button>
-        <button (click)="tmp()">tmp</button> -->
+    <p>Hi friendddd, how's it going &lt;3</p>
+    <p>Look who's obsessed with me (¬_¬") </p>
+    <p>Just kidding!  Let's find you an outfit okayyyy</p>
+    <div class="row" id="choice">
+        <div class="box col">
+            <button [routerLink]="['/askai']">ask ai (go crazy!)</button>
+        </div>
+        <div class="box col">
+            <button [routerLink]="['/fillform']">fill a guided form</button>
+        </div>
     </div>
+
+    <!-- <img src="/avatar.png"> -->
 </div>

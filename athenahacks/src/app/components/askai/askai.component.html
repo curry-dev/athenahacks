@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <p>Go crazy! I don't judge.<br>Tell me - what do you want an outfit suggestion for? Or simply what vibe are you going for?<br>Let's plan!</p>
+        <!-- <input type="text" #prompt (keyup.enter)="calc(prompt.value)"> -->
+        
+        <textarea 
+          (input)="adjustHeight($event)" 
+          #prompt
+          placeholder="Type your prompt here..."
+          class="expandable-textarea">
+        </textarea>
+
+        <br>
+        <button (click)="calc(prompt.value)" id="aiSearch">Go wild</button>
+
+        <div *ngIf=response class="answer-box">
+          <p>My supreme suggestion would be: {{response}}. But you do you!</p>
+          <p>Here's more ideas (visual): </p>
+
+          <br>
+          <a id="googleSimilar" href='https://www.google.com/searchbyimage?image_url=https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.png&client=app'>find similar online</a>
+          
+          <form method="GET" action="https://www.amazon.com/gp/aws/cart/add.html"> 
+            <input type="hidden" name="AssociateTag" value="Associate Tag" /><br/> 
+            <p>
+              <input name="ASIN.1" value="B0D41HH9L9" type="hidden" /><br/>
+              <input name="Quantity.1" value="1" type="hidden" /><br/>
+            </p> 
+            <input type="submit" name="add" value="buy similar on amazon" id="amazonSimilar" />
+          </form>
+        </div>
+      </div>
+  </div>

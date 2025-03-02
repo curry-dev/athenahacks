@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+    font-family: "Playwrite IT Moderna", cursive;
+    letter-spacing: 0.5px;
+}
+
+@font-face {
+    font-family: 'snippers';
+    src: url('assets/fonts/snippers.otf') format('opentype');
+}

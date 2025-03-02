@@ -1,0 +1,37 @@
+.container {
+    text-align: center;
+    align-items: center;
+}
+
+#choice {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin: 50px 10px;
+    padding: 200px;
+    border-radius: 10px;
+    background-color: pink;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+
+    font-family: 'snippers', sans-serif;
+    font-size: large;
+
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-bottom: 10px solid rgb(128, 0, 128, 0.5);
+    border-right: 10px solid rgb(128, 0, 128, 0.7);
+}
+
+button.selected {
+    border-bottom: 10px solid rgb(128, 0, 128, 0.5);
+    border-right: 10px solid rgb(128, 0, 128, 0.7);
+}
+
+button:active {
+    border: 0;
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+}
