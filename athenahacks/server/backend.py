@@ -4,6 +4,10 @@ from google.genai import types
 from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
 
+import random
+from pprint import pprint
+import re
+
 
 
 # mongodb start
@@ -34,6 +38,8 @@ client = genai.Client(api_key=google_API_KEY)
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculate():
     fetched_prompt = request.json.get('prompt', '')
+    fetched_prompt = fetched_prompt if fetched_prompt.strip() != '' else 'get me an outfit'
+    print('fetched_prompt:', fetched_prompt)
     additional_prompt = 'Just give the keywords of the outfit that tell what i should wear in terms of clothing. For example: tee, leather jacket, jeans. No text decoration. Just comma separated words. The request is: '
     response = client.models.generate_content(
         model="gemini-2.0-flash",
@@ -41,18 +47,35 @@ def calculate():
     )
 
     # make an array of keywords from the response
-    prompt1 = 'Generate a python list (as code) containing the suggested outfit keywords from the response attached. Ignore colours. Keep each element one word only. Let each element be an clothing piece. Reduce the list by choosing the best option from similar clothing. Like instead of suggesting both skirt and shorts, suggest only one of them. The keywords need to be certain words only. If the keyword is similar to these words, convert it into the word and put it into the list. The certain words are (blouses_shirts, denim, dresses, graphic_tees, jackets_coats, leggings, pants, rompers_jumpsuits, shorts, skirts, sweaters, sweatshirts_hoodies, tees_tanks, jackets_vests, shirts_polos, suiting). Convert the list into a dictionary like {"top": top, "bottom": bottom, "coat": coat, "other": other}. All keys are optional. Use this response to generate the list: ' + response.text
+    prompt1 = 'Generate a python list containing the suggested outfit keywords from the response attached. Replace each element in the list with the closest option from this list: [Blouses_Shirts, Cardigans, Denim, Dresses, Graphic_Tees, Jackets_Coats, Leggings, Pants, Rompers_Jumpsuits, Shorts, Skirts, Sweaters, Sweatshirts_Hoodies, Tees_Tanks, Jackets_Vests, Shirts_Polos, Suiting]. Only respond with the list and nothing else. Display the result as comma separated words. Use this response to generate the list: ' + response.text
     getKeywords = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=prompt1,
     )
     
     # look for keywords_array elements in the database
-    keywords = getKeywords.text
+    chosen_outfit = []
+    approved_keywords_men = ['Denim', 'Pants', 'Sweaters', 'Sweatshirts_Hoodies', 'Tees_Tanks', 'Jackets_Vests', 'Shirts_Polos', 'Suiting', 'Shorts']
+    approved_keywords_women = ['Blouses_Shirts', 'Cardigans', 'Denim', 'Dresses', 'Graphic_Tees', 'Jackets_Coats', 'Leggings', 'Pants', 'Rompers_Jumpsuits', 'Shorts', 'Skirts', 'Sweaters', 'Sweatshirts_Hoodies', 'Tees_Tanks']
+    keywords = getKeywords.text.split(',')
+    selectedGender = request.json.get('selectedGender', 'WOMEN')
+    selectedGender = 'MEN' if selectedGender == 'male' else 'WOMEN'
+    approved_keywords = approved_keywords_men if selectedGender == 'MEN' else approved_keywords_women
+    
+    print('keywords:', keywords, 'selectedGender: ', selectedGender)
     for keyword in keywords:
-        collection.find_one({'type': keyword})
+        if len(chosen_outfit) == 3:
+            break
         
-    return jsonify({'response': response.text})
+        keyword = keyword.strip().replace('\n', '')
+        if keyword not in approved_keywords:
+            continue
+        
+        front_occurrences = collection.find({'gender': selectedGender, 'outfit_type': keyword, 'filename': {"$regex": re.escape('front')}})
+        chosen_front = random.choice(list(front_occurrences))
+        chosen_outfit.append(chosen_front['cloudinary_url'])
+
+    return jsonify({'response': response.text, 'chosen_outfit': chosen_outfit})
 
 
 

@@ -1,9 +1,10 @@
 <div class="container">
+  <div *ngIf="!response">
     <div class="row">
       <div class="col">
-        <p>Go crazy! I don't judge.<br>Tell me - what do you want an outfit suggestion for? Or simply what vibe are you going for?<br>Let's plan!</p>
-        <!-- <input type="text" #prompt (keyup.enter)="calc(prompt.value)"> -->
-        
+        <h4>We listen and we don't judge.</h4>
+          <br><p>Tell me - what do you want an outfit suggestion for? Or simply what vibe are you going for?<br>Let's plan!</p>
+
         <textarea 
           (input)="adjustHeight($event)" 
           #prompt
@@ -12,23 +13,37 @@
         </textarea>
 
         <br>
-        <button (click)="calc(prompt.value)" id="aiSearch">Go wild</button>
-
-        <div *ngIf=response class="answer-box">
-          <p>My supreme suggestion would be: {{response}}. But you do you!</p>
-          <p>Here's more ideas (visual): </p>
-
-          <br>
-          <a id="googleSimilar" href='https://www.google.com/searchbyimage?image_url=https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.png&client=app'>find similar online</a>
-          
-          <form method="GET" action="https://www.amazon.com/gp/aws/cart/add.html"> 
-            <input type="hidden" name="AssociateTag" value="Associate Tag" /><br/> 
-            <p>
-              <input name="ASIN.1" value="B0D41HH9L9" type="hidden" /><br/>
-              <input name="Quantity.1" value="1" type="hidden" /><br/>
-            </p> 
-            <input type="submit" name="add" value="buy similar on amazon" id="amazonSimilar" />
-          </form>
-        </div>
+        <button (click)="calc(prompt.value, 'WOMEN')" id="aiSearch" class="mt-2">Go wild</button>
       </div>
+    </div>
   </div>
+
+  <div *ngIf="response" class="answer-box">
+    <p>My supreme suggestion would be: {{ response }}. But you do you!</p><br>
+    <p>Here's some visual ideas:</p><br>
+
+    <div class="row">
+      <div *ngFor="let piece of chosen_outfit" class="col p-2">
+        <img [src]="piece" alt="outfit" class="img-fluid" style="width: 300px; height: auto;"><br>
+        <a id="googleSimilar" class="m-5" [href]="'https://www.google.com/searchbyimage?image_url=' + piece + '&client=app'" target="_blank">
+          Find similar online
+        </a>
+        <br>
+      </div>
+    </div>
+
+    <button (click)="calc(sendAgain, 'WOMEN')" id="doAgain" class="mt-5">Do again!</button>
+
+
+
+    <!-- <form method="GET" action="https://www.amazon.com/gp/aws/cart/add.html" target="_blank">
+      <input type="hidden" name="AssociateTag" value="Associate Tag" /><br/>
+      <p>
+        <input name="ASIN.1" value="B0D41HH9L9" type="hidden" /><br/>
+        <input name="Quantity.1" value="1" type="hidden" /><br/>
+      </p> 
+      <input type="submit" name="add" value="buy similar on amazon" id="amazonSimilar" />
+    </form> -->
+
+  </div>
+</div>

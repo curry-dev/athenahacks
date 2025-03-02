@@ -19,17 +19,21 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class AskaiComponent {
   prompt: string = '';
+  sendAgain: string = '';
+  selectedGender: string = 'WOMEN';
   response: string = '';
+  chosen_outfit: string[] = [];
   height = "1.125rem";
   textArea: any;
 
-
   constructor(private _apiservice: ApiService) {}
 
-  calc(prompt: string) {
-    this._apiservice.getCalc(prompt).subscribe(res => {
+  calc(prompt: string, selectedGender: string) {
+    this.sendAgain = prompt ?? 'get me an outfit';
+    this._apiservice.getCalc(prompt, selectedGender).subscribe(res => {
       this.response = res.response;
-      console.log('response:', res);
+      this.chosen_outfit = res.chosen_outfit;
+      console.log('response:', this.response, 'chosen_outfit:', this.chosen_outfit);
     });
   }
 

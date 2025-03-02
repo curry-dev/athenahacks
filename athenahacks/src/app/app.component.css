@@ -4,18 +4,21 @@
 
 #nav {
     align-items: center;
-    text-align: center;
+    /* text-align: center; */
     height: 56px;
     width: 100%;
 
     background-color: white;
-    /* z-index: 100; */
-    /* position: fixed; */
     top: 0;
     margin: 0;
+}
 
-    display: flex;
-    justify-content: space-between;
+#logo {
+    text-align: left;
+}
+
+#nav-links {
+    text-align: right;
 }
 
 #nav a {

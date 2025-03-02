@@ -1,20 +1,22 @@
 .container {
     text-align: center;
     padding: 100px;
+    font-family: "Playwrite IT Moderna", cursive;
 }
 
 textarea {
-    width: 75%;
+    width: 50%;
 }
 
 .answer-box {
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    padding: 20px;
     background-color: pink;
     border-radius: 10px;
-    padding: 100px;
+    /* padding: 100px; */
 }
 
-#aiSearch, #googleSimilar, #amazonSimilar {
+#doAgain, #aiSearch, #googleSimilar, #amazonSimilar {
     padding: 15px;
     background-color: purple;
     color: white;
@@ -31,12 +33,12 @@ textarea {
     border-right: 5px solid rgba(255, 194, 204, 0.7);
 }
 
-#aiSearch.selected, #googleSimilar.selected, #amazonSimilar.selected {
+#doAgain.selected, #aiSearch.selected, #googleSimilar.selected, #amazonSimilar.selected {
     border-bottom: 5px solid rgba(255, 194, 204, 0.5);
     border-right: 5px solid rgba(255, 194, 204, 0.7);
 }
 
-#aiSearch:active, #googleSimilar:active, #amazonSimilar:active {
+#doAgain:active, #aiSearch:active, #googleSimilar:active, #amazonSimilar:active {
     border: 0;
     -webkit-transform: translateY(5px);
     transform: translateY(5px);
