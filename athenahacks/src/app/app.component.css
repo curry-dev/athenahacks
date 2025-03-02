@@ -1,0 +1,41 @@
+#nav {
+    align-items: center;
+    text-align: center;
+    height: 56px;
+    width: 100vw;
+    margin-bottom: 50px;
+
+    background-color: white;
+    /* box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2); */
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    margin-left: 0;
+}
+
+#nav a {
+    text-decoration: none;
+    color: black;
+}
+
+#nav a:hover {
+    color: purple;
+}
+
+.active-link {
+    /* background-color: yellow; */
+    padding: 5px;
+    border-bottom: 2px solid black;
+}
+
+footer {
+    z-index: 100;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(218, 218, 218);
+    align-items: center;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+}

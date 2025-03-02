@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>prompt</h1>
+        
+      <input type="text" #prompt (keyup.enter)="calc(prompt.value)" style="width: 300px; height: 100px;">
+      <p>Response: {{ response }}</p>
+
+        <!-- <button (click)="calc('hello')">calculate</button>
+        <button (click)="tmp()">tmp</button> -->
+    </div>
+</div>
