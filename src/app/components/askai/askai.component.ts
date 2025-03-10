@@ -37,10 +37,6 @@ export class AskaiComponent {
     });
   }
 
-  tmp() {
-    this._apiservice.getTmp().subscribe(res=>console.log('tmp:', res));
-  }
-
 
 
   adjustHeight(event: any) {

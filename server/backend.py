@@ -26,7 +26,7 @@ collection = db['outfits']
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "http://127.0.0.1:4200"], "methods": ["GET", "POST", "OPTIONS"]}}, allow_headers=["Access-Control-Allow-Methods", "Access-Control-Allow-Origin", "Content-Type", "Access-Control-Allow-Headers"], supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "http://127.0.0.1:4200", "https://curry-dev.github.io"], "methods": ["GET", "POST", "OPTIONS"]}}, allow_headers=["Access-Control-Allow-Methods", "Access-Control-Allow-Origin", "Content-Type", "Access-Control-Allow-Headers"], supports_credentials=True)
 
 
 
@@ -76,13 +76,6 @@ def calculate():
         chosen_outfit.append(chosen_front['cloudinary_url'])
 
     return jsonify({'response': response.text, 'chosen_outfit': chosen_outfit})
-
-
-
-
-@app.route('/tmp')
-def tmp():
-    return jsonify({'response': 'tmp'})
 
 
 
